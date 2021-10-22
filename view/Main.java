@@ -89,6 +89,37 @@ public class Main {
         return opcao;
     }
 
+    public static void exibeCrud(Scanner sc, Object controlador){
+        System.out.println("1-Cadastrar \t 2-Listar \t 3-Excluir \t Atualizar");
+        int opcao = lerOpcao(sc);
+        if(controlador instanceof Produto){
+            ProdutoController pc = (ProdutoController)controlador;
+            Produto p = new Produto();
+            switch(opcao){
+                case 1:
+                    System.out.print("Indorme o id: ");
+                    p.id = Integer.parseInt(sc.nextLine());
+                    System.out.print("Informe o nome: ");
+                    p.nome = sc.nextLine();
+                    System.out.print("Informe o valor: ");
+                    p.valor = Double.parseDouble(sc.nextLine());
+                    System.out.print("Informe o id da categoria: ");
+                    p.categoria.id = Integer.parseInt(sc.nextLine());
+                    cadastrar(p, pc);
+                break;
+                case 2:
+                    listar(pc);
+                break;
+                case 3:             
+                    System.out.print("Informe o id do produto que quer excluir:");
+                    p.id = Integer.parseInt(sc.nextLine());
+                    excluir(p , pc);
+                break;
+            }
+        }
+      
+    }
+
     public static void cadastrar(Object obj, Object controlador){
         if(obj instanceof Produto){
             Produto p = (Produto) obj;
