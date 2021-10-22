@@ -33,4 +33,10 @@ public class BaseController<T> {
     public boolean exist(T obj){
         return this.dados.contains(obj);
     }
+
+    public Object buscar(int id){
+        for (T t : dados) {
+            
+        }
+    }
 }
