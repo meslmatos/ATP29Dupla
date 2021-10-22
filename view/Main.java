@@ -22,9 +22,11 @@ public class Main {
             switch (opc) {
                 case 1:
                     System.out.println("CATEGORIA");
+                    exibeCrud(sc, cc);
                     break;
                 case 2:
                     System.out.println("PRODUTO");
+                    exibeCrud(sc, pc);
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -34,48 +36,6 @@ public class Main {
                     break;
             }
         } while(opc != 0);
-
-        Categoria c1 = new Categoria();
-        c1.id = 1;
-        c1.nome = "Eletrônicos";
-        c1.descricao = "blablablabla";
-
-        Produto p1 = new Produto();
-        p1.id = 1;
-        p1.nome = "Celular";
-        p1.valor = 1234.99;
-        p1.categoria = c1;
-
-        cadastrar(p1, pc);
-        cadastrar(c1, cc);
-
-        Produto p2 = new Produto();
-        p2.id = 2;
-        p2.nome = "TV";
-        p2.valor = 2889.98;
-        p2.categoria = c1;
-        cadastrar(p2, pc);
-     
-        listar(cc);
-        listar(pc);
-
-        p2.nome = "Ar-Condicionado";
-        p2.valor = 3450.34;
-
-        atualizar(p2, pc);
-        listar(pc);
-        
-        Categoria c2 = new Categoria();
-        c2.id = 2;
-        c2.nome = "Eletrodomésticos";
-        c2.descricao = "hudhushsishus";
-        cadastrar(c2, cc);
-
-        excluir(c1, cc);
-        excluir(p2, pc);
-        
-        listar(cc);
-        listar(pc);
     }
 
     public static void menu(){
@@ -90,31 +50,89 @@ public class Main {
     }
 
     public static void exibeCrud(Scanner sc, Object controlador){
-        System.out.println("1-Cadastrar \t 2-Listar \t 3-Excluir \t Atualizar");
+        System.out.println("1-Cadastrar \t 2-Listar \t 3-Excluir \t 4-Atualizar");
         int opcao = lerOpcao(sc);
-        if(controlador instanceof Produto){
+        if(controlador instanceof ProdutoController){
             ProdutoController pc = (ProdutoController)controlador;
             Produto p = new Produto();
             switch(opcao){
                 case 1:
-                    System.out.print("Indorme o id: ");
+                    System.out.print("Informe o id: ");
                     p.id = Integer.parseInt(sc.nextLine());
                     System.out.print("Informe o nome: ");
                     p.nome = sc.nextLine();
                     System.out.print("Informe o valor: ");
                     p.valor = Double.parseDouble(sc.nextLine());
+                    Categoria c = new Categoria();
                     System.out.print("Informe o id da categoria: ");
-                    p.categoria.id = Integer.parseInt(sc.nextLine());
+                    c.id = Integer.parseInt(sc.nextLine());
+                    System.out.print("Informe o nome da categoria: ");
+                    c.nome = sc.nextLine();
+                    System.out.print("Informe a descricao da categoria: ");
+                    c.descricao = sc.nextLine();
+                    p.categoria = c;
                     cadastrar(p, pc);
+                    System.out.println("PRODUTO CADASTRADO!");
                 break;
                 case 2:
+                    System.out.println("LISTAGEM DE PRODUTOS");
                     listar(pc);
                 break;
                 case 3:             
                     System.out.print("Informe o id do produto que quer excluir:");
                     p.id = Integer.parseInt(sc.nextLine());
                     excluir(p , pc);
+                    System.out.println("PRODUTO EXCLUIDO!");
                 break;
+                case 4:
+                    System.out.print("Informe o id a ser atualizado: ");
+                    p.id = Integer.parseInt(sc.nextLine());
+                    System.out.print("Informe o nome a ser atualizado: ");
+                    p.nome = sc.nextLine();
+                    System.out.print("Informe o valor a ser atualizado: ");
+                    p.valor = Double.parseDouble(sc.nextLine());
+                    System.out.print("Informe o id da categoria a ser atualizado: ");
+                    p.categoria.id = Integer.parseInt(sc.nextLine());
+                    System.out.print("Informe o nome da categoria a ser atualizado: ");
+                    p.categoria.nome = sc.nextLine();
+                    System.out.print("Informe a descricao da categoria a ser atualizado: ");
+                    p.categoria.descricao = sc.nextLine();
+                    atualizar(p, pc);
+                    System.out.println("PRODUTO ATUALIZADO!");
+            }
+        } else if(controlador instanceof CategoriaController){
+            CategoriaController cc = (CategoriaController)controlador;
+            Categoria c = new Categoria();
+            switch(opcao){
+                case 1:
+                    System.out.print("Informe o id da categoria: ");
+                    c.id = Integer.parseInt(sc.nextLine());
+                    System.out.print("Informe o nome da categoria: ");
+                    c.nome = sc.nextLine();
+                    System.out.print("Informe a descricao da categoria: ");
+                    c.descricao = sc.nextLine();
+                    cadastrar(c, cc);
+                    System.out.println("CATEGORIA CADASTRADA!");
+                break;
+                case 2:
+                    System.out.println("LISTAGEM DE CATEGORIAS");
+                    listar(cc);
+                break;
+                case 3:             
+                    System.out.print("Informe o id do categoria que quer excluir:");
+                    c.id = Integer.parseInt(sc.nextLine());
+                    excluir(c , cc);
+                    System.out.println("CATEGORIA EXCLUIDA!");
+                break;
+                case 4:
+                    System.out.print("Informe o id da categoria a ser atualizado: ");
+                    c.id = Integer.parseInt(sc.nextLine());
+                    System.out.print("Informe o nome da categoria a ser atualizado: ");
+                    c.nome = sc.nextLine();
+                    System.out.print("Informe a descricao da categoria a ser atualizado: ");
+                    c.descricao = sc.nextLine();
+                    atualizar(c, cc);
+                    System.out.println("CATEGORIA ATUALIZADA!");
             }
         }
       

@@ -34,9 +34,9 @@ public class BaseController<T> {
         return this.dados.contains(obj);
     }
 
-    public Object buscar(int id){
+    /*public Object buscar(int id){
         for (T t : dados) {
             
         }
-    }
+    }*/
 }
