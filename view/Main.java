@@ -12,7 +12,29 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         ProdutoController pc = new ProdutoController();
-        CategoriaController cc = new CategoriaController();       
+        CategoriaController cc = new CategoriaController();
+        
+        int opc = 0;
+        do{
+            menu();
+            opc = lerOpcao(sc);
+
+            switch (opc) {
+                case 1:
+                    System.out.println("CATEGORIA");
+
+                    break;
+                case 2:
+                    System.out.println("PRODUTO");
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opcao invalida!");
+                    break;
+            }
+        } while(opc != 0);
 
         Categoria c1 = new Categoria();
         c1.id = 1;
@@ -59,7 +81,7 @@ public class Main {
 
     public static void menu(){
         System.out.println("SISTEMA DE CADASTRO");
-        System.out.println("1 - CATEGORIAS \t2-PRODUTOS");
+        System.out.println("1 - CATEGORIAS \t2-PRODUTOS \t0-SAIR");
     }
 
     public static int lerOpcao(Scanner sc){
