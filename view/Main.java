@@ -22,7 +22,6 @@ public class Main {
             switch (opc) {
                 case 1:
                     System.out.println("CATEGORIA");
-
                     break;
                 case 2:
                     System.out.println("PRODUTO");
